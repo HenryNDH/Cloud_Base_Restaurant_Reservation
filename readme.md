@@ -4,8 +4,6 @@
 
 For individuals seeking to make restaurant reservations online conveniently who prioritizes efficiency and flexibility in their dining experiences, The CloudReserve system is a cloud-based restaurant reservation platform that offers an intuitive interface for users to book, manage, and cancel reservations seamlessly. Unlike traditional reservation methods involving phone calls or walk-ins, our product provides real-time updates, personalized notifications, and efficient reservation management tools for both customers and restaurant staff, enhancing the overall dining experience.
 
-## Overview
-
 FOR individuals seeking to make restaurant reservations online conveniently
 
 WHO prioritizes efficiency and flexibility in their dining experiences, The CloudReserve system is a cloud-based restaurant reservation platform.
