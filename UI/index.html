@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+      .form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="form" id="reservationForm">
+      <label for="customerName">Customer Name:</label>
+      <input type="text" id="customerName" name="customerName" /><br /><br />
+
+      <label for="reservationDate">Reservation Date:</label>
+      <input
+        type="date"
+        id="reservationDate"
+        name="reservationDate" /><br /><br />
+
+      <label for="reservationTime">Reservation Time:</label>
+      <input
+        type="time"
+        id="reservationTime"
+        name="reservationTime" /><br /><br />
+
+      <label for="partySize">Party Size:</label>
+      <input type="number" id="partySize" name="partySize" /><br /><br />
+
+      <button type="button" onclick="submitReservation()">Submit</button>
+    </form>
+
+    <script>
+      function submitReservation() {
+        // Retrieve input values
+        var customerName = document.getElementById("customerName").value;
+        var reservationDate = document.getElementById("reservationDate").value;
+        var reservationTime = document.getElementById("reservationTime").value;
+        var partySize = document.getElementById("partySize").value;
+
+        // Create JSON object
+        var reservationData = {
+          action: "create",
+          customer_name: customerName,
+          reservation_date: reservationDate,
+          reservation_time: reservationTime,
+          party_size: parseInt(partySize),
+        };
+
+        // Fetch data to API endpoint
+        fetch("http://localhost:8080/reservations", {
+          method: "POST", // Specify the HTTP method
+          headers: {
+            "Content-Type": "application/json", // Specify content type as JSON
+          },
+          body: JSON.stringify(reservationData), // Convert object to JSON string
+        })
+          .then((response) => {
+            if (response.ok) {
+              console.log("Reservation submitted successfully");
+              // Redirect to confirmation page
+              window.location.href = "confirmation.html";
+            } else {
+              console.error("Error submitting reservation");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        // Log JSON object for demonstration
+        console.log(reservationData);
+
+        // You can perform further actions here, such as sending the data to a server
+      }
+    </script>
+  </body>
+</html>

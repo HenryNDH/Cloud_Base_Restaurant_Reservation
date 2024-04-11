@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cancel Reservation</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Link to external CSS file -->
+  </head>
+  <body>
+    <h1>Cancel Reservation</h1>
+    <form class="form" id="cancelForm">
+      <label for="reservationId">Reservation ID:</label>
+      <input
+        type="number"
+        id="reservationId"
+        name="reservationId" /><br /><br />
+      <button type="button" onclick="cancelReservation()">
+        Cancel Reservation
+      </button>
+    </form>
+
+    <script>
+      function cancelReservation() {
+        // Retrieve reservation ID
+        var reservationId = document.getElementById("reservationId").value;
+
+        // Create data object
+        var cancelData = {
+          action: "delete",
+          reservation_id: parseInt(reservationId),
+        };
+
+        // Fetch to API endpoint
+        fetch("http://localhost:8080/reservations", {
+          method: "POST", // Specify the HTTP method
+          headers: {
+            "Content-Type": "application/json", // Specify content type as JSON
+          },
+          body: JSON.stringify(cancelData), // Convert object to JSON string
+        })
+          .then((response) => {
+            if (response.ok) {
+              console.log("Reservation cancelled successfully");
+              // Redirect back to the list page
+              window.location.href = "list.html";
+            } else {
+              console.error("Error cancelling reservation");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+
+        // Log data for demonstration
+        console.log(cancelData);
+
+        // You can perform further actions here, such as sending the data to a server
+      }
+    </script>
+  </body>
+</html>

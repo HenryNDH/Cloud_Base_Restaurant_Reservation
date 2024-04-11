@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservations</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+      h1 {
+        text-align: center;
+      }
+      #reservations-container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .reservation {
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .reservation p {
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      .reservation button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      .reservation button:hover {
+        background-color: #0056b3;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body onload="fetchAndDisplay()">
+    <h1>Reservations</h1>
+    <div id="reservations-container"></div>
+
+    <script>
+      function fetchAndDisplay() {
+        // Make an AJAX request to fetch the data
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            // Parse the JSON response
+            var data = JSON.parse(this.responseText);
+            // Call function to display reservations
+            displayReservations(data.reservations);
+          }
+        };
+        xhttp.open("GET", "http://localhost:8080/reservations", true);
+        xhttp.send();
+      }
+
+      function displayReservations(reservations) {
+        // Get the container where reservations will be displayed
+        var container = document.getElementById("reservations-container");
+
+        // Clear previous content
+        container.innerHTML = "";
+
+        // Loop through each reservation and create HTML elements to display them
+        reservations.forEach(function (reservation) {
+          var reservationDiv = document.createElement("div");
+          reservationDiv.classList.add("reservation");
+          reservationDiv.innerHTML = `
+          <p>Reservation ID: ${reservation.reservation_id}</p>
+          <p>Customer Name: ${reservation.customer_name}</p>
+          <p>Reservation Date: ${reservation.reservation_date}</p>
+          <p>Reservation Time: ${reservation.reservation_time}</p>
+          <p>Party Size: ${reservation.party_size}</p>
+          <button onclick="cancelReservation()">Cancel Reservation</button>
+          <hr>
+        `;
+          container.appendChild(reservationDiv);
+        });
+      }
+
+      function cancelReservation() {
+        // Redirect to cancel.html
+        window.location.href = "cancel.html";
+      }
+    </script>
+  </body>
+</html>

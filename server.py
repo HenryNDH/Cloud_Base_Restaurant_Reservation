@@ -24,6 +24,7 @@ class ReservationServer(http.server.BaseHTTPRequestHandler):
     def _set_response(self, content_type='application/json'):
         self.send_response(200)
         self.send_header('Content-type', content_type)
+        self.send_header('Access-Control-Allow-Origin', '*')  # Allow requests from all origins
         self.end_headers()
 
     def create_table(self):
@@ -40,6 +41,13 @@ class ReservationServer(http.server.BaseHTTPRequestHandler):
             print("Table 'reservations' created successfully.")
         except mysql.connector.Error as err:
             print("Error creating table:", err)
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
 
     def do_GET(self):
         if self.path == '/reservations':
