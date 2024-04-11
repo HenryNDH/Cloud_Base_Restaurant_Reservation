@@ -68,14 +68,3 @@ As a user, I want to receive notifications about my reservation confirmation, re
 2. Reservation booking feature with date, time, and party size selection.
 3. Reservation management feature for users to view, modify, and cancel bookings.
 4. Table availability management feature for restaurant staff.
-5. Customer information management feature, including preferences and allergies.
-6. Notification system for reservation confirmation, reminders, and updates.
-7. Mobile-responsive interface for on-the-go reservation management.
-8. Integration with popular payment gateways for secure online transactions.
-9. Reporting and analytics tools for tracking reservation trends and customer feedback.
-10. Integration with external calendar systems for synchronized scheduling.
-11. Loyalty program integration for rewarding frequent diners.
-12. Accessibility features for users with disabilities.
-13. Internationalization and localization support for multiple languages and regions.
-14. Continuous monitoring and performance optimization for scalability and reliability.
-15. Regular updates and feature enhancements based on user feedback and industry trends.
